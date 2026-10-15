@@ -1,2 +1,2 @@
 # vs
-LOCK33:vscode
+LOCK33 Development Organization's vscode action tool.
