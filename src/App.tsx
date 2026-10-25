@@ -211,7 +211,7 @@ export function App() {
     setDialog({
       kind: 'reset',
       title: 'Reset sample workspace',
-      body: 'Replace the files in this browser with the sample welcome.md and src/hello.ts files.',
+      body: 'Replace the files in this browser with the sample welcome.md, go.os, and src/hello.ts files.',
       confirmLabel: 'Reset',
       targetId: null,
     })

@@ -1,7 +1,8 @@
+import goOsSource from '../go.os?raw'
 import { readStorage, writeStorage } from './storage'
 
-export const WORKSPACE_STORAGE_KEY = 'vs.workspace.v1'
-export const SESSION_STORAGE_KEY = 'vs.session.v1'
+export const WORKSPACE_STORAGE_KEY = 'vs.workspace.v2'
+export const SESSION_STORAGE_KEY = 'vs.session.v2'
 export const WORD_WRAP_STORAGE_KEY = 'vs.wordWrap'
 
 export type FileNode = {
@@ -51,7 +52,7 @@ Press Ctrl+Shift+P or F1.
 
 The sun and moon control sits at the bottom of the left bar on a wide screen, and at the top right on a phone.
 
-Open \`src/hello.ts\` from the file list to edit the TypeScript sample.
+Open \`go.os\` for the Go sample, or \`src/hello.ts\` for the TypeScript sample.
 `
 
 const HELLO = `/** Sample file shipped with Go-Orbit-Programmers-Pro / vs. */
@@ -83,6 +84,7 @@ export function createSeedWorkspace(): Workspace {
     version: 1,
     children: [
       { type: 'file', id: 'file-welcome', name: 'welcome.md', content: WELCOME },
+      { type: 'file', id: 'file-go-os', name: 'go.os', content: goOsSource },
       {
         type: 'folder',
         id: 'folder-src',
@@ -306,11 +308,12 @@ export function deleteNode(workspace: Workspace, id: string): Workspace {
 export function defaultSession(workspace: Workspace): Session {
   const files = listFiles(workspace.children)
   const hello = files.find((file) => file.path === 'src/hello.ts')
+  const goOs = files.find((file) => file.path === 'go.os')
   const welcome = files.find((file) => file.path === 'welcome.md')
-  const openIds = [welcome?.id, hello?.id].filter((id): id is string => Boolean(id))
+  const openIds = [welcome?.id, goOs?.id, hello?.id].filter((id): id is string => Boolean(id))
   return {
     openIds,
-    activeId: hello?.id ?? welcome?.id ?? files[0]?.id ?? null,
+    activeId: goOs?.id ?? hello?.id ?? welcome?.id ?? files[0]?.id ?? null,
     expandedIds: listFolderIds(workspace.children),
   }
 }

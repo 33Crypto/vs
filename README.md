@@ -10,6 +10,7 @@ Go-Orbit-Programmers-Pro is LOCK33 Development Organization's vscode action tool
 - Command menu entries **Use light theme** and **Use dark theme** (Ctrl+Shift+P or F1).
 - The theme choice is stored in `localStorage` under `vs.theme` and the editor surface follows it.
 - File tree with new file, new folder, rename, delete, and download. The workspace is stored in this browser.
+- Starter files include `go.os` (Go, including the `os` package) and `src/hello.ts`.
 - Layout that works on a phone: the file list opens over the editor, and the theme control moves to the top right.
 
 ## Requirements

@@ -15,7 +15,8 @@ describe('App', () => {
 
     const editor = screen.getByTestId('editor-surface')
     expect(editor.getAttribute('data-theme')).toBe('dark')
-    expect(editor.getAttribute('data-path')).toBe('src/hello.ts')
+    expect(editor.getAttribute('data-path')).toBe('go.os')
+    expect(screen.getAllByText('go.os').length).toBeGreaterThan(0)
     expect(screen.getAllByText('hello.ts').length).toBeGreaterThan(0)
     expect(document.documentElement.dataset.theme).toBe('dark')
 

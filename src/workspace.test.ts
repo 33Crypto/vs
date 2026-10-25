@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  WORKSPACE_STORAGE_KEY,
   createNode,
   createSeedWorkspace,
   deleteNode,
@@ -16,10 +17,13 @@ import {
 } from './workspace'
 
 describe('workspace', () => {
-  it('seeds a welcome file and a TypeScript sample', () => {
+  it('seeds welcome, go.os, and a TypeScript sample', () => {
     const workspace = createSeedWorkspace()
     const files = listFiles(workspace.children)
-    expect(files.map((file) => file.path)).toEqual(['welcome.md', 'src/hello.ts'])
+    expect(files.map((file) => file.path)).toEqual(['welcome.md', 'go.os', 'src/hello.ts'])
+    const goOs = workspace.children.find((entry) => entry.type === 'file' && entry.name === 'go.os')
+    expect(goOs?.type === 'file' && goOs.content).toContain('package main')
+    expect(goOs?.type === 'file' && goOs.content).toContain('"os"')
     expect(files[0]?.path).toBe('welcome.md')
     expect(workspace.children[0]?.type === 'file' && workspace.children[0].content).toContain(
       'lock33.dev',
@@ -32,13 +36,14 @@ describe('workspace', () => {
     const loaded = loadWorkspace()
     expect(listFiles(loaded.children).map((file) => file.path)).toEqual([
       'welcome.md',
+      'go.os',
       'src/hello.ts',
     ])
   })
 
   it('falls back when storage is corrupt', () => {
-    localStorage.setItem('vs.workspace.v1', '{')
-    expect(listFiles(loadWorkspace().children)).toHaveLength(2)
+    localStorage.setItem(WORKSPACE_STORAGE_KEY, '{')
+    expect(listFiles(loadWorkspace().children)).toHaveLength(3)
   })
 
   it('creates, renames, updates, and deletes', () => {
@@ -71,7 +76,7 @@ describe('workspace', () => {
     if (!folder) return
     expect(fileIdsUnder(folder)).toContain(created.id)
     workspace = deleteNode(workspace, 'folder-src')
-    expect(listFiles(workspace.children).map((entry) => entry.path)).toEqual(['welcome.md'])
+    expect(listFiles(workspace.children).map((entry) => entry.path)).toEqual(['welcome.md', 'go.os'])
   })
 
   it('rejects duplicate and empty names', () => {

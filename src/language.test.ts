@@ -4,6 +4,7 @@ import { languageForPath, languageLabel } from './language'
 describe('language', () => {
   it('detects languages from paths', () => {
     expect(languageForPath('src/hello.ts')).toBe('typescript')
+    expect(languageForPath('go.os')).toBe('go')
     expect(languageForPath('welcome.md')).toBe('markdown')
     expect(languageForPath('README')).toBe('plaintext')
     expect(languageForPath(null)).toBe('plaintext')

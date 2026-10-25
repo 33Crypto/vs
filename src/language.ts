@@ -15,6 +15,7 @@ const EXTENSION_LANGUAGE: Record<string, string> = {
   htm: 'html',
   py: 'python',
   go: 'go',
+  os: 'go',
   rs: 'rust',
   yml: 'yaml',
   yaml: 'yaml',
