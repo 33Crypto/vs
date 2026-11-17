@@ -1,0 +1,18 @@
+{
+  "name": "vs — Go-Orbit-Programmers-Pro",
+  "short_name": "vs",
+  "description": "LOCK33 Development Organization's vscode action tool for lock33.dev.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#111318",
+  "theme_color": "#111318",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
